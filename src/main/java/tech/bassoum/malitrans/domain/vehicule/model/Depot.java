@@ -3,6 +3,8 @@ package tech.bassoum.malitrans.domain.vehicule.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
