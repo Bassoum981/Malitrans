@@ -15,9 +15,17 @@ import java.time.LocalDate;
 @PrimaryKeyJoinColumn(name = "id")
 public class Chauffeur extends Employe {
 
+    @Column(nullable = false, unique = true)
     private String numeroPermis;
-    private String categoriePermis;
+
+    @Column(nullable = false)
+    private String categoriePermis; // Ex: A, B, C, D, etc.
+
+    @Column(nullable = false)
     private LocalDate dateExpirationPermis;
+
     private LocalDate dateVisiteMedicale;
+
+    @Column(nullable = false)
     private Double salaire;
 }

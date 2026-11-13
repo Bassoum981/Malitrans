@@ -22,7 +22,6 @@ public class PassagerMapper {
                 .email(passager.getEmail())
                 .telephone(passager.getTelephone())
                 .adresse(passager.getAdresse())
-                .cni(passager.getCni())
                 .statut(passager.getStatut())
                 .build();
     }
@@ -38,9 +37,8 @@ public class PassagerMapper {
         passager.setPrenom(requestDto.getPrenom());
         passager.setEmail(requestDto.getEmail());
         passager.setTelephone(requestDto.getTelephone());
-        passager.setMotDePasse(requestDto.getMotDePasse()); // Pensez à le crypter plus tard avec Spring Security !
+        passager.setMotDePasse(requestDto.getMotDePasse()); // Sera encrypté via Spring Security dans le service
         passager.setAdresse(requestDto.getAdresse());
-        passager.setCni(requestDto.getCni());
         passager.setStatut(StatutUtilisateur.ACTIF); // Statut par défaut à la création
 
         return passager;
