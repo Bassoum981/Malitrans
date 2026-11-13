@@ -39,6 +39,8 @@ public class AuthService {
                 .token(jwtToken)
                 .email(utilisateur.getEmail())
                 .nomComplet(utilisateur.getPrenom() + " " + utilisateur.getNom())
+                .role(utilisateur.getRole())         // On injecte le rôle
+                .statut(utilisateur.getStatut())
                 .build();
     }
 }

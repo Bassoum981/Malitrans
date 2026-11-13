@@ -1,24 +1,24 @@
 package tech.bassoum.malitrans.domain.utilisateur.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.SuperBuilder;
+import lombok.*;
+import lombok.experimental.SuperBuilder; // <--- INDISPENSABLE : Ne pas oublier cet import !
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import tech.bassoum.malitrans.domain.utilisateur.enums.RoleUtilisateur;
 import tech.bassoum.malitrans.domain.utilisateur.enums.StatutUtilisateur;
 
 import java.util.Collection;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "utilisateurs")
-@SuperBuilder
+@SuperBuilder // <--- Active le builder en cascade
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Utilisateur implements UserDetails {
 
@@ -47,12 +47,15 @@ public abstract class Utilisateur implements UserDetails {
     @Column(nullable = false)
     private StatutUtilisateur statut;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RoleUtilisateur role;
+
     // --- Implémentation de UserDetails pour Spring Security ---
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Attribue un rôle dynamique basé sur le type d'entité (ex: ROLE_PASSAGER, ROLE_EMPLOYE, ROLE_CHAUFFEUR)
-        return List.of(new SimpleGrantedAuthority("ROLE_" + this.getClass().getSimpleName().toUpperCase()));
+        return List.of(new SimpleGrantedAuthority(this.role.name()));
     }
 
     @Override
@@ -62,7 +65,7 @@ public abstract class Utilisateur implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.email; // On utilise l'email comme identifiant unique de connexion
+        return this.email;
     }
 
     @Override
@@ -72,7 +75,6 @@ public abstract class Utilisateur implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        // Le compte n'est pas bloqué si le statut n'est pas SUSPENDU
         return this.statut != StatutUtilisateur.SUSPENDU;
     }
 
@@ -83,7 +85,6 @@ public abstract class Utilisateur implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        // Le compte est actif si son statut est ACTIF
         return this.statut == StatutUtilisateur.ACTIF;
     }
 }

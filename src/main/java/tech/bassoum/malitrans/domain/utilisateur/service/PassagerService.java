@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.bassoum.malitrans.domain.utilisateur.dto.PassagerRequestDto;
 import tech.bassoum.malitrans.domain.utilisateur.dto.PassagerResponseDto;
+import tech.bassoum.malitrans.domain.utilisateur.enums.RoleUtilisateur;
+import tech.bassoum.malitrans.domain.utilisateur.enums.StatutUtilisateur;
 import tech.bassoum.malitrans.domain.utilisateur.mapper.PassagerMapper;
 import tech.bassoum.malitrans.domain.utilisateur.model.Passager;
 import tech.bassoum.malitrans.domain.utilisateur.repository.PassagerRepository;
@@ -30,8 +32,10 @@ public class PassagerService {
         // 2. Convertir le DTO en entité via le mapper
         Passager passager = passagerMapper.toEntity(requestDto);
 
-        // 3. Hasher le mot de passe pour la sécurité
+        // 3. Sécurité et configuration des attributs obligatoires hérités d'Utilisateur
         passager.setMotDePasse(passwordEncoder.encode(requestDto.getMotDePasse()));
+        passager.setStatut(StatutUtilisateur.ACTIF); // Statut par défaut à l'inscription
+        passager.setRole(RoleUtilisateur.ROLE_PASSAGER); // Rôle figé et sécurisé pour ce service
 
         // 4. Sauvegarder en base de données
         Passager passagerSauvegarde = passagerRepository.save(passager);

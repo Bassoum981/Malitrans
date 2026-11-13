@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @SuperBuilder
-@Table(name = "emplyes")
+@Table(name = "employes")
 @PrimaryKeyJoinColumn(name = "id")
 public class Employe extends Utilisateur {
     @Column(unique = true, nullable = false)

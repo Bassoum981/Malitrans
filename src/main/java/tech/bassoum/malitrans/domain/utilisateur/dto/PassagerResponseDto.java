@@ -1,5 +1,6 @@
 package tech.bassoum.malitrans.domain.utilisateur.dto;
 
+import tech.bassoum.malitrans.domain.utilisateur.enums.RoleUtilisateur;
 import tech.bassoum.malitrans.domain.utilisateur.enums.StatutUtilisateur;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +16,5 @@ public class PassagerResponseDto {
     private String adresse;
     private String cni;
     private StatutUtilisateur statut;
+    private RoleUtilisateur role;
 }

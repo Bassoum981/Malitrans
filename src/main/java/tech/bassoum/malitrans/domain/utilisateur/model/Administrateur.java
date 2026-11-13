@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "adminstrateurs")
+@Table(name = "administrateurs")
 public class Administrateur extends Utilisateur {
 
 
