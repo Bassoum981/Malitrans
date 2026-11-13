@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "adminstrateurs")
-public class Administrateur extends User {
+public class Administrateur extends Utilisateur {
 
 
 }

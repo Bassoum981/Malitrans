@@ -1,13 +1,23 @@
 package tech.bassoum.malitrans.domain.utilisateur.model;
 
-import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import java.time.LocalDate;
 
-@Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Chauffeur extends User {
+@SuperBuilder
+@Entity
+@Table(name = "chauffeurs")
+@PrimaryKeyJoinColumn(name = "id")
+public class Chauffeur extends Employe {
+
+    private String numeroPermis;
+    private String categoriePermis;
+    private LocalDate dateExpirationPermis;
+    private LocalDate dateVisiteMedicale;
+    private Double salaire;
 }
