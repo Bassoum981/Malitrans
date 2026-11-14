@@ -6,12 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import tech.bassoum.malitrans.domain.utilisateur.dto.CaissierRequestDto;
-import tech.bassoum.malitrans.domain.utilisateur.dto.CaissierResponseDto;
-import tech.bassoum.malitrans.domain.utilisateur.dto.ChauffeurRequestDto;
-import tech.bassoum.malitrans.domain.utilisateur.dto.ChauffeurResponseDto;
+import tech.bassoum.malitrans.domain.utilisateur.dto.*;
 import tech.bassoum.malitrans.domain.utilisateur.service.CaissierService;
 import tech.bassoum.malitrans.domain.utilisateur.service.ChauffeurService;
+import tech.bassoum.malitrans.domain.utilisateur.service.MecanicienService;
 
 @RestController
 @RequestMapping("/api/admin/employes")
@@ -34,4 +32,12 @@ public class EmployeAdminApi {
         CaissierResponseDto response = caissierService.creerCaissier(requestDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+    private final MecanicienService mecanicienService; // Injection
+
+    @PostMapping("/mecaniciens")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<MecanicienResponseDto> creerMecanicien(@Valid @RequestBody MecanicienRequestDto requestDto) {
+        return new ResponseEntity<>(mecanicienService.creerMecanicien(requestDto), HttpStatus.CREATED);
+    }
+
 }
