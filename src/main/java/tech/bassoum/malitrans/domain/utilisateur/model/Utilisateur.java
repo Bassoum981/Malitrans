@@ -48,7 +48,7 @@ public abstract class Utilisateur implements UserDetails {
     private StatutUtilisateur statut;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length =50)
     private RoleUtilisateur role;
 
     // --- Implémentation de UserDetails pour Spring Security ---

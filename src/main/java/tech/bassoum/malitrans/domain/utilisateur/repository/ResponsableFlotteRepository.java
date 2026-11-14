@@ -1,4 +1,9 @@
 package tech.bassoum.malitrans.domain.utilisateur.repository;
 
-public class ResponsableFlotteRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import tech.bassoum.malitrans.domain.utilisateur.model.ResponsableFlotte;
+
+@Repository
+public interface ResponsableFlotteRepository extends JpaRepository<ResponsableFlotte, Integer> {
 }

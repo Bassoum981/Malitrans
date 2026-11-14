@@ -1,4 +1,33 @@
 package tech.bassoum.malitrans.domain.utilisateur.dto;
 
+import jakarta.validation.constraints.*;
+import lombok.Data;
+import java.time.LocalDate;
+
+@Data
 public class ResponsableFlotteRequestDto {
+    @NotBlank(message = "Le nom est obligatoire")
+    private String nom;
+
+    @NotBlank(message = "Le prénom est obligatoire")
+    private String prenom;
+
+    @Email(message = "Format d'email invalide")
+    @NotBlank(message = "L'email est obligatoire")
+    private String email;
+
+    @NotBlank(message = "Le téléphone est obligatoire")
+    private String telephone;
+
+    @NotBlank(message = "Le mot de passe est obligatoire")
+    private String motDePasse;
+
+    @NotBlank(message = "Le matricule est obligatoire")
+    private String matricule;
+
+    private LocalDate dateEmbauche;
+    private String service;
+    private Double salaire;
+
+    private String grade; // Spécifique au ResponsableFlotte
 }
