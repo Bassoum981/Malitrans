@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import tech.bassoum.malitrans.domain.utilisateur.model.ResponsableFlotte;
 
 @Repository
-public interface ResponsableFlotteRepository extends JpaRepository<ResponsableFlotte, Integer> {
+public interface ResponsableFlotteRepository extends JpaRepository<ResponsableFlotte, Long> {
 }
