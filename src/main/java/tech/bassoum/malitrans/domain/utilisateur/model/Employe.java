@@ -24,6 +24,8 @@ public class Employe extends Utilisateur {
 
     private String service;
 
+    private Double salaire;
+
     public void consulterPlanning() {
         // Logique métier à implémenter
     }
