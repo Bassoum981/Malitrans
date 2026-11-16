@@ -44,7 +44,7 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/api/auth/**" // Routes publiques
+                                "/api/auth/**"// Routes publiques
                         ).permitAll()
                         .anyRequest().authenticated() // Tout le reste exige un token valide
                 )
