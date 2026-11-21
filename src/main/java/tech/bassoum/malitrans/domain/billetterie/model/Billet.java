@@ -18,12 +18,13 @@ import java.time.LocalDateTime;
 @Builder
 @Table(name = "billets")
 public class Billet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "numero_billet", unique = true, nullable = false)
-    private String numeroBillet; // Identifiant unique pour QR Code (ex: MLT-2026-XXXX)
+    private String numeroBillet; // Identifiant unique (ex: MLT-2026-XXXX)
 
     @Column(name = "date_emission", nullable = false)
     private LocalDateTime dateEmission;
@@ -32,9 +33,9 @@ public class Billet {
     @Column(nullable = false)
     private StatutBillet statut;
 
-    // Le passager détenteur du billet
+    // Optionnel : rempli si acheté depuis un compte mobile, null si acheté au guichet/à bord
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "passager_id", nullable = false)
+    @JoinColumn(name = "passager_id", nullable = true)
     private Passager passager;
 
     // L'affectation (Bus + Chauffeur + Ligne + Horaire)
@@ -42,7 +43,7 @@ public class Billet {
     @JoinColumn(name = "affectation_id", nullable = false)
     private Affectation affectation;
 
-    // Le siège réservé (optionnel selon le type de ligne : urbain vs interurbain)
+    // Le siège réservé (optionnel en transport urbain)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "siege_id", nullable = true)
     private Siege siege;
@@ -58,7 +59,7 @@ public class Billet {
             this.dateEmission = LocalDateTime.now();
         }
         if (this.statut == null) {
-            this.statut = StatutBillet.RESERVE;
+            this.statut = StatutBillet.VALIDE;
         }
     }
 }

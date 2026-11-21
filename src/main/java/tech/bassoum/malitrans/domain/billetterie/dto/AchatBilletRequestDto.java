@@ -4,16 +4,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record AchatBilletRequestDto(
-        @NotNull(message = "L'identifiant du passager est obligatoire")
-        Long passagerId,
+        Long passagerId, // Optionnel : null pour un achat ponctuel sans compte passager
 
-        @NotNull(message = "L'identifiant de l'affectation est obligatoire")
+        @NotNull(message = "L'affectation est obligatoire")
         Long affectationId,
 
-        Long siegeId, // Optionnel (null si placement libre en transport urbain)
+        Long siegeId,
 
         @NotBlank(message = "Le mode de paiement est obligatoire")
-        String modePaiement, // Ex: "Orange Money", "Moov", "Espèces"
+        String modePaiement,
 
-        String referencePaiement // Référence opérateur (générée auto si vide, ex: paiement espèces)
+        String referencePaiement
 ) {}
